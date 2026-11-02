@@ -1,0 +1,3 @@
+address,status,description,role,fqdn,ip_namespace,interface
+198.51.100.1/29,active,"Export gateway, north",,gateway.example.invalid,Export Lab,router-01 / eth0
+2001:db8:99::1/64,reserved,Export v6 address,loopback,v6.example.invalid,Export Lab,

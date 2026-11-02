@@ -1,13 +1,44 @@
 [
   {
     "name": "week",
-    "title": "This week",
-    "subtitle": "Network Addresses for Claude Code: what needs attention, rendered by npm run view",
+    "title": "Network address review",
+    "subtitle": "A snapshot of recorded inventory. No live discovery.",
     "sections": [
       {
-        "title": "Needs attention",
-        "note": "TODO(author): point this at the industry's attention view (overdue, stuck, quiet).",
-        "sql": "select 'replace me' as item, 'TODO(author)' as why"
+        "title": "Capacity",
+        "sql": "select namespace,name,subnet,member_type,trunc(capacity)::text as capacity,trunc(used)::text as used,trunc(available)::text as available,used_percent from capacity_review where status<>'deprecated' order by namespace,subnet"
+      },
+      {
+        "title": "Decisions due",
+        "sql": "select code,namespace,name,address,requester,due,attention from change_review order by due"
+      }
+    ]
+  },
+  {
+    "name": "evidence",
+    "title": "Ownership and review evidence",
+    "sections": [
+      {
+        "title": "Review queue",
+        "sql": "select entity,record,owner,review_due from review_queue order by review_due nulls first"
+      },
+      {
+        "title": "Record checks",
+        "sql": "select rule,entity,record,finding from compliance_findings order by rule,record"
+      }
+    ]
+  },
+  {
+    "name": "reservations",
+    "title": "Address reservations",
+    "sections": [
+      {
+        "title": "Reserved addresses",
+        "sql": "select namespace,name,address::text,subnet,owner,review_due from address_register where status='reserved' order by namespace,address"
+      },
+      {
+        "title": "Open follow-ups",
+        "sql": "select n.name as namespace,a.title,a.owner,a.due from actions a join namespaces n on n.id=a.namespace_id where a.status='open' order by a.due"
       }
     ]
   }

@@ -1,0 +1,3 @@
+prefix,member_type,is_pool,status,description,role,ip_namespace,scope
+198.51.100.0/29,address,False,active,Export demo range,management,Export Lab,Demo site
+2001:db8:99::/64,address,False,reserved,Export IPv6,customer,Export Lab,Demo site

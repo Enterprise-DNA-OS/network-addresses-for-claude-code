@@ -1,11 +1,45 @@
 [
   {
-    "name": "example",
-    "title": "TODO(author): the first document this industry must produce",
-    "for_each": "select gen_random_uuid() as id, 'Example' as name",
+    "name": "network-handover",
+    "title": "Network handover",
+    "for_each": "select id,name from namespaces order by name",
     "file": "name",
     "sections": [
-      { "title": "Details", "sql": "select 'replace me' as item, $1::text as record_id" }
+      {
+        "title": "Accountability",
+        "layout": "record",
+        "sql": "select name,owner,purpose,review_due from namespaces where id=$1"
+      },
+      {
+        "title": "Ranges",
+        "sql": "select name,subnet,member_type,trunc(capacity)::text as capacity,trunc(used)::text as used,used_percent from capacity_review where namespace_id=$1 order by subnet"
+      },
+      {
+        "title": "Address record",
+        "sql": "select name,address::text,subnet,status,owner,review_due,issue from address_register where namespace_id=$1 order by address"
+      },
+      {
+        "title": "Follow-ups",
+        "sql": "select title,owner,due,status,resolution from actions where namespace_id=$1 order by due"
+      }
+    ]
+  },
+  {
+    "name": "change-record",
+    "title": "Address change record",
+    "for_each": "select id,code from changes order by code",
+    "file": "code",
+    "sections": [
+      {
+        "title": "Inventory decision",
+        "note": "This record does not approve or deploy a device configuration.",
+        "layout": "record",
+        "sql": "select code,address::text,name,owner,requester,reason,due,status,reviewer,decision_note,decided_at from changes where id=$1"
+      },
+      {
+        "title": "Evidence at decision",
+        "sql": "select snapshot from changes where id=$1"
+      }
     ]
   }
 ]

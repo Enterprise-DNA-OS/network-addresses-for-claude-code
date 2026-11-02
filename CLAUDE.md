@@ -1,43 +1,57 @@
-# Network Addresses for Claude Code: operating instructions
+# Network Addresses for Claude Code
 
-This file is the brain. Claude Code reads it at the start of every session. It says who this is for, how work gets done, and the one right way to do each recurring job.
+For the network operator who owns address plans and review evidence. Set your business name in brand.json.
 
-## Who this is for
+## Work from records
 
-- **Business:** [YOUR BUSINESS]
-- **Operator:** [YOUR NAME], [your role]
-- **What matters most:** [the one or two outcomes you care about]
+Read before writing. Use npm run network -- help. Every answer starts with a current CLI read. A namespace is an address-space boundary, not a security tenant. No command discovers devices or configures a network.
 
-Fill this in once. A worker with context knows. A worker without it guesses.
+## Routing
 
-## How to work
-
-1. **Take a brief, not a script.** The operator describes the outcome. You run the right command and present the answer.
-2. **Read before you write.** Before drafting anything about a record, read its full history first.
-3. **Plain language.** Short sentences. No filler. Numbers in tables.
-4. **Silent success, loud problems.** No play-by-play. Say what broke and what you did about it.
-5. **Stop at the line.** Anything that sends, deletes, or faces a customer waits for a yes in this session.
-
-## Routing table: one right way for each recurring job
-
-| When the operator asks for... | Use this |
+| Request | Recipe |
 |---|---|
-| <!-- TODO(author): one row per slash command --> | `/...` |
+| Review network boundaries | /namespaces |
+| Read the address ranges | /prefixes |
+| Read the address register | /addresses |
+| Read one network and its follow-ups | /namespace |
+| Read one range and its addresses | /prefix |
+| Read one address and its evidence | /address |
+| Read a proposal and its decision snapshot | /change |
+| Review address capacity | /capacity |
+| Find the next recorded free address | /next-free |
+| Review held addresses | /reservations |
+| Find ownership and evidence gaps | /review-due |
+| Review outstanding address decisions | /change-review |
+| Read follow-up work | /actions |
+| Read before and after history | /activity |
+| Check address and accountability rules | /compliance |
+| Prepare the weekly network review | /weekly-review |
+| Add an isolated address plan | /add-namespace |
+| Add a range or container | /add-prefix |
+| Propose an address reservation | /propose |
+| Record a separately verified activation | /activate |
+| Record a reviewed reservation decision | /decide |
+| Retire an address record | /release |
+| Log ownership and review evidence | /review |
+| Add follow-up work | /add-action |
+| Record completed follow-up work | /close-action |
+| Bring Infrahub address records across | /import |
+| Write a private portable snapshot | /export |
+| Draft a network handover | /draft-handover |
+| Draft an address decision record | /draft-change |
+| Find urgent work | /attention |
+| Log verification | /log |
+| Change fields or a rule | /customise |
+| Add a read-only report | /new-view |
 
-If an ask fits nothing here, run the CLI directly (`npm run <cli> -- --help`) and then propose a new command for it.
+## Rules
 
-## Hard rules
+Every mutation uses --actor and starts with --dry-run. Apply the reviewed result within the operator's authority. Do not invent identities, dates, inspection evidence or decisions. Ambiguous names list candidates and stop. Approval needs a different named reviewer and records an inventory reservation only. Confirm actual network state through the operator's established process.
 
-- Never send email or messages from here. Draft to `drafts/`, a person sends.
-- Never delete records without an explicit yes in this session. Prefer marking closed or archived.
-- Never invent a record. If a name is ambiguous, list the candidates and ask.
-- The database is the source of truth. If the answer is not in it, say so.
+Drafts remain in drafts/. Never send or publish. Never delete records, deploy device configuration, modify DNS or DHCP, or handle device credentials. Use release for an authorised retirement. Read docs/compliance.md before interpreting checks. A finding is not a certification.
 
-## Where things live
+## Files
 
-- `scripts/` the CLI. `scripts/lib/db.mjs` picks `DATABASE_URL` (Postgres, Supabase) or the embedded database in `.data/`.
-- `supabase/migrations/` the schema, plain SQL. `npm run migrate` applies it.
-- `.claude/commands/` the slash commands. Add one every time the same ask comes twice.
-- `docs/` the thesis and the guide for moving off Infrahub.
+scripts/network.mjs is the one CLI. supabase/migrations holds tested schema changes. npm test uses a disposable database. npm run docs and npm run view render branded HTML. AGENTS.md routes Codex, OpenCode and Cursor to this same library. Do not fork commands per runtime.
 
-Built by Enterprise DNA. Installed and run for you as part of Omni: https://enterprisedna.co/omni/instead-of/infrahub
+Enterprise DNA builds and operates custom versions through Omni by Enterprise DNA. https://enterprisedna.co/omni/book/?offer=replace-software&utm_campaign=infrahub
