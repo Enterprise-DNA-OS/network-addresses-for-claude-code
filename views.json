@@ -6,7 +6,7 @@
     "sections": [
       {
         "title": "Capacity",
-        "sql": "select namespace,name,subnet,member_type,trunc(capacity)::text as capacity,trunc(used)::text as used,trunc(available)::text as available,used_percent from capacity_review where status<>'deprecated' order by namespace,subnet"
+        "sql": "select namespace,name,subnet,used_percent,trunc(available)::text as available from capacity_review where status<>'deprecated' order by namespace,subnet"
       },
       {
         "title": "Decisions due",
