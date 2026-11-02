@@ -6,7 +6,7 @@ Find the last free address, the range nobody owns and the reservation still wait
 |---|---|---|
 | Free, MIT. Install and run the demo. | Your address rules, imports, reports and connections. | Installed and operated through Omni by Enterprise DNA. One setup fee, then a retainer. |
 
-[Get your version built](https://enterprisedna.co/omni/book/?offer=replace-software&utm_source=github&utm_medium=readme&utm_campaign=infrahub) · [Instead of Infrahub](https://enterprisedna.co/omni/instead-of/infrahub)
+[Get your version built](https://enterprisedna.co/omni/book/?offer=replace-software&utm_source=github&utm_medium=readme&utm_campaign=infrahub) · [Instead of Infrahub](https://enterprisedna.co/omni/instead-of/infrahub?utm_source=github&utm_medium=readme&utm_campaign=infrahub)
 
 ## Start with the weekly address review
 
