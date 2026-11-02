@@ -217,7 +217,9 @@ function human(value,title){
  return `${title}: ${value}`;
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(path.resolve(process.argv[1])).href){
- let db;try{db=await getDb();const result=await execute(db,process.argv.slice(2));console.log(process.argv.includes('--json')?JSON.stringify(result,null,2):`${result.dry_run?'Preview only, rolled back.\n':''}${human(result.data,result.command)}`);}
+ let db;try{db=await getDb();const result=await execute(db,process.argv.slice(2));const columns={capacity:['namespace','name','subnet','used_percent','available'],'review-due':['entity','record','owner','review_due'],'change-review':['code','namespace','name','requester','due']}[result.command];
+ const display=columns&&Array.isArray(result.data)?result.data.map(row=>Object.fromEntries(columns.map(key=>[key,row[key]]))):result.data;
+ console.log(process.argv.includes('--json')?JSON.stringify(result,null,2):`${result.dry_run?'Preview only, rolled back.\n':''}${human(display,result.command)}`);}
  catch(e){if(process.argv.includes('--json'))console.error(JSON.stringify({error:e.message}));else console.error(e.message);process.exitCode=1;}
  finally{if(db)await db.close();}
 }
